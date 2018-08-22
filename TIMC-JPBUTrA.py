@@ -39,20 +39,20 @@ SCAN_THREAD_WAIT = 0.25
 class SetupMainWindow:
     def __init__(self):
         self.gui_width = 485
-        self.gui_height = 555
+        self.gui_height = 222
         self.baud = 115200
 
 
 class SetupScanAxisFrame:
     def __init__(self):
         self.axisName = "SCAN"
-        self.axisUnits = "deg"
-        self.jogText1 = "CCW"
-        self.jogText2 = "CW"
-        self.speedMin = 0.5
-        self.speedMax = 20
-        self.speedRes = 0.5
-        self.maxError = 0.22
+        self.axisUnits = "in"
+        self.jogText1 = "BACKWARD"
+        self.jogText2 = "FORWARD"
+        self.speedMin = 0.1
+        self.speedMax = 1
+        self.speedRes = 0.1
+        self.maxError = 0.1
         self.queue_name = "CTRL"
 
 

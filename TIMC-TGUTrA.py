@@ -649,7 +649,7 @@ class UpdateLog(threading.Thread):
     # Header at the beginning of the log file
     def print_header(self):
         self.file.write("===============================================================\n")
-        self.file.write("          Tooling Inspection Motion Controller - JPIT          \n")
+        self.file.write("          Tooling Inspection Motion Controller - TGUT          \n")
         self.file.write("                         - LOG FILE -                          \n")
         self.file.write("===============================================================\n")
         self.file.write("Controller Initialized:\n")

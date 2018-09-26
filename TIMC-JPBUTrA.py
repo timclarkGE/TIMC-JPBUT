@@ -49,9 +49,9 @@ class SetupScanAxisFrame:
         self.axisUnits = "in"
         self.jogText1 = "BACKWARD"
         self.jogText2 = "FORWARD"
-        self.speedMin = 0.1
+        self.speedMin = 0.01
         self.speedMax = 1
-        self.speedRes = 0.1
+        self.speedRes = 0.01
         self.maxError = 0.1
         self.queue_name = "CTRL"
 

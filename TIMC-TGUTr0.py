@@ -3,7 +3,7 @@
 # Tool: Top Guide UT                         #
 # PLM Code Storage:  DOC-0009-1257           #
 # PLM Parameter File Storage: DOC-0009-1258  #
-# Code Revision: A                           #
+# Code Revision: 0                           #
 ##############################################
 # Revision Updates:
 #   N/A
@@ -56,7 +56,7 @@ class SetupScanAxisFrame:
         self.queue_name = "CTRL"
 
 
-# Main GUI window which contains the four other frames: Scanhead, Pusher, Scan Frame, Status Frame
+# Main GUI window which contains the four other frames: Scan, Status Frame
 class MainWindow:
     def __init__(self, master, parameters):
         self.parameters = parameters
@@ -506,7 +506,7 @@ class UpdateStatus(threading.Thread):
                     # Create fault masks to bitwise AND the data to determine which type of fault has occured.
                     for i in range(0, len(self.fault_array)):
                         if ((s_fault & (faultMask << i)) != 0):
-                            TIMC.fault.update_status("FAULT: Scanhead " + str(self.fault_array[i]))
+                            TIMC.fault.update_status("FAULT: Scan " + str(self.fault_array[i]))
 
     def stop(self):
         self._is_running = 0
@@ -569,7 +569,7 @@ class UpdateLog(threading.Thread):
         self.fault_array = fault_array
 
         # Create log file with date and time as apart of the file name
-        text = "JPIT_LOG_" + str(time.strftime("%Y-%m-%d__%H-%M-%S", time.localtime())) + ".txt"
+        text = "TGUT_LOG_" + str(time.strftime("%Y-%m-%d__%H-%M-%S", time.localtime())) + ".txt"
         self.file = open(text, "w+")
         self.print_header()
 
@@ -605,21 +605,7 @@ class UpdateLog(threading.Thread):
                                         if(i == 11):
                                             self.file.write(self.pt() + "ESTOP Pressed\n")
                                         else:
-                                            self.file.write(self.pt() + "FAULT: Scanhead " + str(self.fault_array[i]) + '\n')
-
-                        elif("PUSHER" in data):
-                            data = int(data.replace("AXISFAULT (PUSHER)", ""))
-                            # If there is a fault data will be a number other than 0
-                            if (data and self.fault_flag == 0):
-                                # Check which type of fault occurred with Bitwise AND and a fault mask
-                                for i in range(0, len(self.fault_array)):
-                                    faultMask = 1
-                                    if ((data & (faultMask << i)) != 0):
-                                        self.fault_flag = 1
-                                        if (i == 11):
-                                            self.file.write(self.pt() + "ESTOP Pressed\n")
-                                        else:
-                                            self.file.write(self.pt() + "FAULT: Pusher " + str(self.fault_array[i]) + '\n')
+                                            self.file.write(self.pt() + "FAULT: Scan " + str(self.fault_array[i]) + '\n')
                     # CTRL: has information about buttons pressed in the axisframe, but filter out data about AXISSTATUS
                     elif("CTRL:" in data and not "STATUS" in data and not "ABORT" in data):
                         if("ACKNOWLEDGEALL" in data):
